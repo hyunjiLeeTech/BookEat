@@ -4,8 +4,6 @@ import MainContainer from '../../Style/MainContainer';
 import $ from 'jquery';
 import Layout from '../../RestaurantLayout/Layout'
 import { Animated } from 'react-animated-css';
-import Axios from 'axios';
-import authHeader from '../../../Services/authHeader';
 import { withRouter } from "react-router";
 import moment from 'moment'
 import FullScrrenLoading from '../../Style/FullscreenLoading';
