@@ -1,0 +1,9 @@
+#ErrorMessageWrapper{
+    margin-top: 10%;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+#ErrorMessage, #ErrorHint{
+    text-align: center;
+}
