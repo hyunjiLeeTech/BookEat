@@ -6,8 +6,8 @@ const priceRangeSchema = new Schema({
     type: String,
     unique: true,
   },
-  minPrice: { type: Number, required: true },
-  maxPrice: { type: Number, required: true },
+  minPrice: {type: Number, required: true},
+  maxPrice: {type: Number, required: true},
 });
 
 const PriceRange = mongoose.model("PriceRange", priceRangeSchema);

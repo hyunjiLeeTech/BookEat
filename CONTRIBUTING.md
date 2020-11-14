@@ -1,6 +1,4 @@
-# BookEat - Frontend
-
-BookEat is an efficient, easy to use and awesome reservation system which is based on a web application. The purpose of this web application is to make communication between customers and restaurantseasier. With BookEat people canmake a reservation in their favorite restaurant within 1 minute. Also,restaurant owners can easily manage those reservationsin one single page. This is the repository for frontend side of BookEat.
+# BookEat
 
 ## How to Set up
 
@@ -18,3 +16,17 @@ BookEat is an efficient, easy to use and awesome reservation system which is bas
 8. Install all the dependencies using the npm command: npm i
 9. Check the ServerUrl.js has the backend localhost number (ex localhost: 5000)
 10. After you install all the dependencies and made the necessary changes, run the application by using 'npm start'
+
+## Formatting - How to Run Prettier Formatter
+
+This command-line tool use 'Prettier' formatter for formatting. The detailed document about the prettier is the following: [prettier](https://prettier.io/)
+
+1. Open the terminal
+2. Enter `npm run prettier`
+
+- If you want to ignore certain file, add the file on the '.prettierignore' file.
+- If you want to check whether the fiels are formatted or not, run `npm run prettier-check`
+
+## IDE Integration
+
+When you try to contribute to this project, please check whether the formatter (Prettier) is automatically working when you save the file. If it does not work, please install 'Prettier' extension.

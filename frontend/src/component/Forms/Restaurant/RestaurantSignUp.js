@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import MainContainer from "../../Style/MainContainer";
 import Parser from "html-react-parser";
 import $ from "jquery";
@@ -6,24 +6,26 @@ import Axios from "axios";
 import sha256 from "crypto-js/sha256";
 import serverAddress from "../../../Services/ServerUrl";
 import "../Customer/SignUp.css";
-import FullscreenError from '../../Style/FullscreenError'
+import FullscreenError from "../../Style/FullscreenError";
 
 //Validation
 const regExpEmail = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
 const regExpPhone = RegExp(
-  /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
+  /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/,
 );
 
 const regExpPassword = RegExp(
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/,
 );
 
-const regExpPostal = RegExp(/^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/);
+const regExpPostal = RegExp(
+  /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/,
+);
 
 const regExpNumbers = RegExp(/^[0-9]*$/);
 
-const formValid = ({ isError, ...rest }) => {
+const formValid = ({isError, ...rest}) => {
   let isValid = false;
 
   Object.values(isError).forEach((val) => {
@@ -82,7 +84,7 @@ class RestaurantSignUp extends Component {
 
   handleChange(e) {
     e.preventDefault();
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     let isError = this.state.isError;
     switch (name) {
       case "resname":
@@ -165,7 +167,9 @@ class RestaurantSignUp extends Component {
           console.log(res);
           if (res.data.errcode === 0) {
             $("#signResultText")
-              .text("Congrats, Confirm your email address and start advertising your business")
+              .text(
+                "Congrats, Confirm your email address and start advertising your business",
+              )
               .removeClass("alert-warning")
               .removeClass("alert-danger")
               .removeClass("alert-success")
@@ -215,15 +219,12 @@ class RestaurantSignUp extends Component {
     };
   }
   render() {
-    const { isError } = this.state;
+    const {isError} = this.state;
     return (
       <MainContainer>
         {this.state.resultsErr
-          ?
-          FullscreenError("An error occured, please try again later")
-          :
-          null
-        }
+          ? FullscreenError("An error occured, please try again later")
+          : null}
 
         <div className="container">
           <div className="page-header text-center">

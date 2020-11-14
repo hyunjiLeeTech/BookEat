@@ -22,12 +22,12 @@ const managerSchema = new Schema(
     isActive: {
       type: Boolean,
     },
-    restaurantId: { type: Schema.Types.ObjectId, ref: "Restaurant" },
-    accountId: { type: Schema.Types.ObjectId, ref: "Account" },
+    restaurantId: {type: Schema.Types.ObjectId, ref: "Restaurant"},
+    accountId: {type: Schema.Types.ObjectId, ref: "Account"},
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Manager = mongoose.model("Manager", managerSchema);

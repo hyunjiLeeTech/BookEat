@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import MainContainer from "../../Style/MainContainer";
 import Parser from "html-react-parser";
 import $ from "jquery";
@@ -6,17 +6,17 @@ import ChangePassword from "../../Forms/Customer/ChangePassword";
 import RestaurantReservation from "../../Reservation/Restaurant/RestaurantReservation";
 import Menu from "../../Menu/Menu";
 import ds from "../../../Services/dataService";
-import FullscreenError from '../../Style/FullscreenError'
-import ViewReview from '../../Review/Restaurant/ViewReview'
+import FullscreenError from "../../Style/FullscreenError";
+import ViewReview from "../../Review/Restaurant/ViewReview";
 
 //Validation
 const regExpEmail = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
 const regExpPhone = RegExp(
-  /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
+  /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/,
 );
 
-const formValid = ({ isError, ...rest }) => {
+const formValid = ({isError, ...rest}) => {
   let isValid = false;
 
   Object.values(isError).forEach((val) => {
@@ -52,7 +52,7 @@ class ManagerProfile extends Component {
         firstName: "&#160;",
         lastName: "&#160;",
       },
-      resultsErr: false
+      resultsErr: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -61,7 +61,7 @@ class ManagerProfile extends Component {
 
   handleChange(e) {
     e.preventDefault();
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     let isError = this.state.isError;
     switch (name) {
       case "email":
@@ -102,21 +102,20 @@ class ManagerProfile extends Component {
     } else {
       console.log("Form is invalid!");
     }
-    try{
+    try {
       $("#manProfileResultText")
-      .text("Profiled is edited")
-      .removeClass("alert-warning")
-      .removeClass("alert-danger")
-      .removeClass("alert-success")
-      .addClass("alert-success");
-    }catch(err){
+        .text("Profiled is edited")
+        .removeClass("alert-warning")
+        .removeClass("alert-danger")
+        .removeClass("alert-success")
+        .addClass("alert-success");
+    } catch (err) {
       $("#manProfileResultText")
-      .text("Sorry, " + err)
-      .removeClass("alert-warning")
-      .removeClass("alert-danger")
-      .removeClass("alert-success")
-      .addClass("alert-danger");
-
+        .text("Sorry, " + err)
+        .removeClass("alert-warning")
+        .removeClass("alert-danger")
+        .removeClass("alert-success")
+        .addClass("alert-danger");
     }
   };
 
@@ -201,20 +200,17 @@ class ManagerProfile extends Component {
             .attr("data-target", "")
             .attr("type", "");
         }
-      }
+      },
     );
   }
 
   render() {
-    const { isError } = this.state;
+    const {isError} = this.state;
     return (
       <MainContainer>
         {this.state.resultsErr
-          ?
-          FullscreenError("An error occured, please try again later")
-          :
-          null
-        }
+          ? FullscreenError("An error occured, please try again later")
+          : null}
         <div className="card">
           <div className="card-header">
             <ul className="nav nav-tabs card-header-tabs">
