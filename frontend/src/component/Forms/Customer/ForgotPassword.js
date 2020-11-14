@@ -1,16 +1,16 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import MainContainer from "../../Style/MainContainer";
 import "./SignUp.js";
 import Parser from "html-react-parser";
 import $ from "jquery";
-import FullscreenError from '../../Style/FullscreenError'
+import FullscreenError from "../../Style/FullscreenError";
 import dataService from "../../../Services/dataService";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 
 //Validation
 const regExpEmail = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
-const formValid = ({ isError, ...rest }) => {
+const formValid = ({isError, ...rest}) => {
   let isValid = false;
 
   Object.values(isError).forEach((val) => {
@@ -40,7 +40,7 @@ class ForgotPassword extends Component {
       isError: {
         email: "&#160;",
       },
-      resultsErr: false
+      resultsErr: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -49,8 +49,8 @@ class ForgotPassword extends Component {
 
   handleChange = (e) => {
     e.preventDefault();
-    const { name, value } = e.target;
-    let isError = { ...this.state.isError };
+    const {name, value} = e.target;
+    let isError = {...this.state.isError};
     switch (name) {
       case "email":
         isError.email = regExpEmail.test(value)
@@ -90,25 +90,28 @@ class ForgotPassword extends Component {
   }
 
   render() {
-    const { isError } = this.state;
-    const getResetPasswordEmail = () =>{
-      dataService.getResetPasswordEmail({email: this.state.email}).then((res)=>{
-        toast("Reset password email sent. Please check your Email inbox", {type: 'success', autoClose: 5000})
-      }).catch(err=>{
-        let errmsg = 'Erro occcured'
-        if(err.errmsg) errmsg = err.errmsg;
-        toast(errmsg, {type: 'error', autoClose: false})
-      })
-    }
+    const {isError} = this.state;
+    const getResetPasswordEmail = () => {
+      dataService
+        .getResetPasswordEmail({email: this.state.email})
+        .then((res) => {
+          toast("Reset password email sent. Please check your Email inbox", {
+            type: "success",
+            autoClose: 5000,
+          });
+        })
+        .catch((err) => {
+          let errmsg = "Erro occcured";
+          if (err.errmsg) errmsg = err.errmsg;
+          toast(errmsg, {type: "error", autoClose: false});
+        });
+    };
 
     return (
       <MainContainer>
-         {this.state.resultsErr
-                    ?
-                    FullscreenError("An error occured, please try again later")
-                    :
-                    null
-                }
+        {this.state.resultsErr
+          ? FullscreenError("An error occured, please try again later")
+          : null}
 
         <div className="container">
           <div className="page-header text-center">
@@ -144,14 +147,16 @@ class ForgotPassword extends Component {
                 onChange={this.handleChange}
                 required
               />
-               <span className="invalid-feedback">
-                  {Parser(isError.email)}
-                </span>
+              <span className="invalid-feedback">{Parser(isError.email)}</span>
             </div>
           </div>
 
           <div className="text-center">
-            <button type="submit" className="btn btn-primary" onClick={getResetPasswordEmail}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={getResetPasswordEmail}
+            >
               Send reset link
             </button>
           </div>

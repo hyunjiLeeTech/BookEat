@@ -4,42 +4,42 @@ const Schema = mongoose.Schema;
 
 const restaurantSchema = new Schema(
   {
-    resName: { type: String, required: false },
-    businessNum: { type: String, required: false },
-    restaurantDescription: { type: String },
-    phoneNumber: { type: Number, required: false },
-    email: { type: String, required: false },
-    status: { type: Number, required: true, default: 3 }, // 2: after sign up. not complete the profile, 4 deavtived
-    eatingTime: { type: Number, required: false },
+    resName: {type: String, required: false},
+    businessNum: {type: String, required: false},
+    restaurantDescription: {type: String},
+    phoneNumber: {type: Number, required: false},
+    email: {type: String, required: false},
+    status: {type: Number, required: true, default: 3}, // 2: after sign up. not complete the profile, 4 deavtived
+    eatingTime: {type: Number, required: false},
 
     // open or close
     monIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     tueIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     wedIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     thuIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     friIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     satIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
     sunIsClose: {
       type: Boolean,
-      default: true
+      default: true,
     },
 
     // open and close times
@@ -129,7 +129,7 @@ const restaurantSchema = new Schema(
     },
 
     //address
-    addressId: { type: Schema.Types.ObjectId, required: false, ref: "Address" },
+    addressId: {type: Schema.Types.ObjectId, required: false, ref: "Address"},
 
     // restaurant owner
     restaurantOwnerId: {
@@ -160,14 +160,16 @@ const restaurantSchema = new Schema(
     },
 
     // pictures
-    pictures: [{
-      type: String,
-      required: false
-    }]
+    pictures: [
+      {
+        type: String,
+        required: false,
+      },
+    ],
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);

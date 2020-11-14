@@ -4,20 +4,20 @@ let Account = require("../models/account.model");
 let Address = require("../models/address.model");
 const Restaurant = require("../models/restaurnat.model");
 let Manager = require("../models/manager.model");
-const { find } = require("../models/restaurnat.model");
+const {find} = require("../models/restaurnat.model");
 const Reservation = require("../models/reservation.model");
 
 let findAccountByEmailAsyc = async function (email) {
-  return await Account.find({ email: email });
+  return await Account.find({email: email});
 };
 let findRestaurantById = async function (actId) {
-  let resOwner = await RestaurantOwner.findOne({ account: actId });
+  let resOwner = await RestaurantOwner.findOne({account: actId});
   console.log("ResOwner: " + resOwner._id);
-  return await Restaurant.findOne({ restaurantOwnerId: resOwner._id });
+  return await Restaurant.findOne({restaurantOwnerId: resOwner._id});
 };
 
 async function findRestaurantOwnerByAccountAsync(acc) {
-  return await RestaurantOwner.findOne({ account: acc });
+  return await RestaurantOwner.findOne({account: acc});
 }
 //get request (/customers)
 router.route("/").get((req, res) => {
@@ -39,9 +39,9 @@ router.route("/getmanagers").get(async (req, res) => {
       restaurantId: restaurant._id,
       isActive: true,
     });
-    res.json({ errcode: 0, managers: managers });
+    res.json({errcode: 0, managers: managers});
   } catch (err) {
-    res.json({ errcode: 1, errmsg: "internal error" });
+    res.json({errcode: 1, errmsg: "internal error"});
   }
 });
 
@@ -60,27 +60,37 @@ router.route("/deletemanager").post(async (req, res) => {
       manAccount.isActive = false;
       manAccount.save();
     });
-    res.json({ errcode: 0, errmsg: "success" });
+    res.json({errcode: 0, errmsg: "success"});
   } catch (err) {
-    res.json({ errcode: 1, errmsg: "internal error" });
+    res.json({errcode: 1, errmsg: "internal error"});
   }
 });
 
-router.get('/deleteAccount', async (req, res) => {
+router.get("/deleteAccount", async (req, res) => {
   var u = req.user;
-  u = await Account.findById(u._id)
+  u = await Account.findById(u._id);
   if (u.userTypeId === 2) {
-    var rest = await Restaurant.findOne({ restaurantOwnerId: await findRestaurantOwnerByAccountAsync(u) });
-    console.log(await findRestaurantOwnerByAccountAsync(u))
+    var rest = await Restaurant.findOne({
+      restaurantOwnerId: await findRestaurantOwnerByAccountAsync(u),
+    });
+    console.log(await findRestaurantOwnerByAccountAsync(u));
     if (rest === null) {
-      res.json({ errcode: 2, errmsg: 'restaurant not found' })
+      res.json({errcode: 2, errmsg: "restaurant not found"});
       return;
     }
-    var managers = await Manager.find({ restaurantId: (await rest)._id })
+    var managers = await Manager.find({restaurantId: (await rest)._id});
 
-    var reservations = await Reservation.find({ status: 2, restaurant: (await rest)._id, }).populate('customer').populate('table');
+    var reservations = await Reservation.find({
+      status: 2,
+      restaurant: (await rest)._id,
+    })
+      .populate("customer")
+      .populate("table");
     if (reservations.length > 0) {
-      return res.json({ errocde: 1, errmsg: 'Please finish all reservations before closing restaurant' })
+      return res.json({
+        errocde: 1,
+        errmsg: "Please finish all reservations before closing restaurant",
+      });
     } else {
       for (var m of managers) {
         var a = await Account.findById(m.accountId);
@@ -90,21 +100,21 @@ router.get('/deleteAccount', async (req, res) => {
         }
       }
       u.isActive = false;
-      u.token = '';
+      u.token = "";
       rest.status = 4;
       await rest.save();
-      await u.save()
-      return res.json({ errcode: 0, errmsg: 'success' })
+      await u.save();
+      return res.json({errcode: 0, errmsg: "success"});
     }
   }
-})
+});
 
 router.route("/getrestaurantinfo").get((req, res) => {
   var _id = req.user._id;
   //query from db
   console.log("/restaurantOwners/getrestaurantinfo:");
-  RestaurantOwner.findOne({ account: _id }).then((restOwner) => {
-    Restaurant.findOne({ restaurantOwnerId: restOwner._id })
+  RestaurantOwner.findOne({account: _id}).then((restOwner) => {
+    Restaurant.findOne({restaurantOwnerId: restOwner._id})
       .populate("addressId")
       .populate("cuisineStyleId")
       .populate("categoryId")
@@ -135,11 +145,11 @@ let addRestaurantOwnerAsync = async function (obj) {
   const regExpEmail = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
   const regExpPhone = RegExp(
-    /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
+    /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/,
   );
 
   const regExpPassword = RegExp(
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/
+    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/,
   );
 
   const regExpPostalCode = RegExp(/^([A-Za-z]\d[A-Za-z][-]?\d[A-Za-z]\d)$/);
@@ -266,10 +276,10 @@ router.post("/add", (req, res) => {
   };
   addRestaurantOwnerAsync(obj)
     .then(() => {
-      res.json({ errcode: 0, errmsg: "success" });
+      res.json({errcode: 0, errmsg: "success"});
     })
     .catch((err) => {
-      res.json({ errcode: 1, errmsg: err });
+      res.json({errcode: 1, errmsg: err});
     });
 });
 

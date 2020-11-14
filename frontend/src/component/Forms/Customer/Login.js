@@ -1,32 +1,32 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
 import MainContainer from "../../Style/MainContainer";
 import "./SignUp.js";
 import Parser from "html-react-parser";
 import $ from "jquery";
 import authService from "../../../Services/AuthService";
 import sha256 from "crypto-js/sha256";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import {GoogleLogin, GoogleLogout} from "react-google-login";
 import FacebookLogin from "react-facebook-login";
 import ds from "../../../Services/dataService";
-import FullscreenError from '../../Style/FullscreenError';
-import { toast } from "react-toastify";
+import FullscreenError from "../../Style/FullscreenError";
+import {toast} from "react-toastify";
 import AuthService from "../../../Services/AuthService";
 
 //Validation
 const regExpEmail = RegExp(
-  /^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$/
+  /^(([A-Za-z0-9]+_+)|([A-Za-z0-9]+-+)|([A-Za-z0-9]+\.+)|([A-Za-z0-9]+\++))*[A-Za-z0-9]+@((\w+-+)|(\w+\.))*\w{1,63}\.[a-zA-Z]{2,6}$/,
 );
 
 const regExpPassword = RegExp(
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/,
 );
 
 //Google ID
 const CLIENT_ID =
   "377822834291-u5q8t038me7rn1k5gieq1b6qrohgqedf.apps.googleusercontent.com";
 
-const formValid = ({ isError, ...rest }) => {
+const formValid = ({isError, ...rest}) => {
   let isValid = false;
 
   Object.values(isError).forEach((val) => {
@@ -60,7 +60,7 @@ class Login extends Component {
         email: "&#160;",
         password: "&#160;",
       },
-      resultsErr: false
+      resultsErr: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -73,8 +73,8 @@ class Login extends Component {
 
   handleChange = (e) => {
     e.preventDefault();
-    const { name, value } = e.target;
-    let isError = { ...this.state.isError };
+    const {name, value} = e.target;
+    let isError = {...this.state.isError};
     switch (name) {
       case "email":
         isError.email = regExpEmail.test(value)
@@ -88,7 +88,7 @@ class Login extends Component {
         //this.state.password = value;
         this.setState({
           password: e.target.value,
-        })
+        });
         break;
       default:
         break;
@@ -132,8 +132,8 @@ class Login extends Component {
           $("#passowrd").text("");
           //this.state.password = "";
           this.setState({
-            password: ''
-          })
+            password: "",
+          });
         }
       });
     } else {
@@ -143,15 +143,20 @@ class Login extends Component {
 
   //Google Log In
   login(response) {
-    AuthService.loginExternal(1, response.accessToken).then(res => {
-      window.location.href = '/'
-    }).catch(err => {
-      if (err.errcode && Number.parseInt(err.errcode) === 1)
-        toast('Failed to validate the external account. Please refresh the page and try agin.')
-      else if (err.errcode && Number.parseInt(err.errcode) === 2) toast('Please sign up first')
-      else toast('error, please try again later.')
-      console.log(err)
-    })
+    AuthService.loginExternal(1, response.accessToken)
+      .then((res) => {
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        if (err.errcode && Number.parseInt(err.errcode) === 1)
+          toast(
+            "Failed to validate the external account. Please refresh the page and try agin.",
+          );
+        else if (err.errcode && Number.parseInt(err.errcode) === 2)
+          toast("Please sign up first");
+        else toast("error, please try again later.");
+        console.log(err);
+      });
   }
 
   logout(response) {
@@ -215,28 +220,30 @@ class Login extends Component {
 
   // Facebook
   responseFacebook(response) {
-    AuthService.loginExternal(2, response.accessToken).then(res => {
-      window.location.href = '/'
-    }).catch(err => {
-      if (err.errcode && Number.parseInt(err.errcode) === 1)
-        toast('Failed to validate the external account. Please refresh the page and try agin.')
-      else if (err.errcode && Number.parseInt(err.errcode) === 2) toast('Please sign up first')
-      else toast('error, please try again later.')
-      console.log(err)
-    })
+    AuthService.loginExternal(2, response.accessToken)
+      .then((res) => {
+        window.location.href = "/";
+      })
+      .catch((err) => {
+        if (err.errcode && Number.parseInt(err.errcode) === 1)
+          toast(
+            "Failed to validate the external account. Please refresh the page and try agin.",
+          );
+        else if (err.errcode && Number.parseInt(err.errcode) === 2)
+          toast("Please sign up first");
+        else toast("error, please try again later.");
+        console.log(err);
+      });
   }
 
   render() {
-    const { isError } = this.state;
+    const {isError} = this.state;
 
     return (
       <MainContainer>
         {this.state.resultsErr
-          ?
-          FullscreenError("An error occured, please try again later")
-          :
-          null
-        }
+          ? FullscreenError("An error occured, please try again later")
+          : null}
         <div className="card">
           <div className="card-body">
             <div className="page-header text-center">
@@ -261,16 +268,16 @@ class Login extends Component {
                     onFailure={this.handleLogoutFailure}
                   ></GoogleLogout>
                 ) : (
-                    <GoogleLogin
-                      clientId={CLIENT_ID}
-                      buttonText="Login"
-                      onSuccess={this.login}
-                      autoLoad={false}
-                      onFailure={this.handleLoginFailure}
-                      cookiePolicy={"single_host_origin"}
-                      responseType="code,token"
-                    />
-                  )}
+                  <GoogleLogin
+                    clientId={CLIENT_ID}
+                    buttonText="Login"
+                    onSuccess={this.login}
+                    autoLoad={false}
+                    onFailure={this.handleLoginFailure}
+                    cookiePolicy={"single_host_origin"}
+                    responseType="code,token"
+                  />
+                )}
                 {this.state.accessToken ? (
                   <h5>
                     Your Access Token: <br />

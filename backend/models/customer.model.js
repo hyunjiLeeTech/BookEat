@@ -4,14 +4,14 @@ const Schema = mongoose.Schema;
 
 const customerSchema = new Schema(
   {
-    account: { type: Schema.Types.ObjectId, ref: "Account" },
+    account: {type: Schema.Types.ObjectId, ref: "Account"},
     firstName: {
       type: String,
       required: true,
       unique: false,
       maxlength: 32,
     },
-    lastName: { type: String, required: false, maxLength: 32 },
+    lastName: {type: String, required: false, maxLength: 32},
     phoneNumber: {
       type: Number,
       required: true,
@@ -27,7 +27,7 @@ const customerSchema = new Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Customer = mongoose.model("Customer", customerSchema);

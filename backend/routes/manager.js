@@ -6,7 +6,7 @@ let Manager = require("../models/manager.model");
 router.route("/getmanagerinfo").get((req, res) => {
   var _id = req.user._id;
 
-  Manager.findOne({ accountId: _id })
+  Manager.findOne({accountId: _id})
     .populate("accountId")
     .then((result) => {
       res.json(result);
@@ -25,10 +25,10 @@ router.route("/editmanagerprofile").post((req, res) => {
 
   editManagerProfile(obj)
     .then(() => {
-      res.json({ errcode: 0, errmsg: "success" });
+      res.json({errcode: 0, errmsg: "success"});
     })
     .catch((err) => {
-      res.json({ errcode: 1, errmsg: err });
+      res.json({errcode: 1, errmsg: err});
     });
 });
 
@@ -39,7 +39,7 @@ let editManagerProfile = async (obj) => {
 
   //validation
   const regExpPhone = RegExp(
-    /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
+    /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/,
   );
 
   let message = "";
@@ -58,7 +58,7 @@ let editManagerProfile = async (obj) => {
     throw message;
   }
 
-  await Manager.findOne({ accountId: obj.accountId })
+  await Manager.findOne({accountId: obj.accountId})
     .then((manager) => {
       manager.firstname = firstname;
       manager.lastname = lastname;
@@ -98,10 +98,10 @@ router.route("/add").post((req, res) => {
 
   addManagerAsync(obj)
     .then(() => {
-      res.json({ errorcode: 0, errmsg: "success" });
+      res.json({errorcode: 0, errmsg: "success"});
     })
     .catch((err) => {
-      res.json({ errcode: 1, errmsg: err });
+      res.json({errcode: 1, errmsg: err});
     });
 });
 

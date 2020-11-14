@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "prettier": "npx prettier --write ."
+  }
+}

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import MainContainer from "../../Style/MainContainer";
 import Parser from "html-react-parser";
 import $ from "jquery";
@@ -10,14 +10,14 @@ import ds from "../../../Services/dataService";
 const regExpEmail = RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/);
 
 const regExpPhone = RegExp(
-  /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/
+  /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/,
 );
 
 const regExpPassword = RegExp(
-  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/
+  /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,32}$/,
 );
 
-const formValid = ({ isError, ...rest }) => {
+const formValid = ({isError, ...rest}) => {
   let isValid = false;
 
   Object.values(isError).forEach((val) => {
@@ -72,7 +72,7 @@ class RestaurantProfile extends Component {
 
   handleChange(e) {
     e.preventDefault();
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     let isError = this.state.isError;
     switch (name) {
       case "email":
@@ -101,9 +101,9 @@ class RestaurantProfile extends Component {
         isError.passwordMan = regExpPassword.test(value)
           ? "&#160;"
           : "At least 6 characters required";
-          this.setState({
-            [e.target.passwordMan] : e.target.value
-          })
+        this.setState({
+          [e.target.passwordMan]: e.target.value,
+        });
         break;
       default:
         break;
@@ -130,24 +130,22 @@ class RestaurantProfile extends Component {
           .addClass("alert-success");
       } catch (err) {
         $("#manSignResultText")
-          .text("Sorry, " + err.errmsg? err.errmsg : 'unkown error')
+          .text("Sorry, " + err.errmsg ? err.errmsg : "unkown error")
           .removeClass("alert-warning")
           .removeClass("alert-danger")
           .removeClass("alert-success")
           .addClass("alert-danger");
       }
-
     } else {
       console.log("Form is invalid!");
     }
-
   };
 
   handleDeleteManager = async (manId) => {
     this.state.deleteManId = manId;
-   
+
     try {
-       await ds.deleteManagerAccount(this.state);
+      await ds.deleteManagerAccount(this.state);
       $("#deleteResultText")
         .text("Manager account is deleted")
         .removeClass("alert-warning")
@@ -155,21 +153,19 @@ class RestaurantProfile extends Component {
         .removeClass("alert-success")
         .addClass("alert-success");
     } catch (err) {
-
       $("#deleteResultText")
-        .text("Sorry, " + err.errmsg? err.errmsg : 'unkown error')
+        .text("Sorry, " + err.errmsg ? err.errmsg : "unkown error")
         .removeClass("alert-warning")
         .removeClass("alert-danger")
         .removeClass("alert-success")
         .addClass("alert-danger");
-
     }
   };
 
   onClick() {
     const usr = authService.getCurrentUser();
 
-    this.setState({ showForm: true });
+    this.setState({showForm: true});
   }
 
   componentDidMount() {
@@ -177,12 +173,12 @@ class RestaurantProfile extends Component {
 
     var t2 = document.getElementById("email");
     t2.onkeypress = function (e) {
-        if (e.keyCode === 32) return false;
+      if (e.keyCode === 32) return false;
     };
 
     var t9 = document.getElementById("password");
     t9.onkeypress = function (e) {
-        if (e.keyCode === 32) return false;
+      if (e.keyCode === 32) return false;
     };
 
     $("#createManagerBtn").on("click", () => {
@@ -213,7 +209,7 @@ class RestaurantProfile extends Component {
   }
 
   renderForm() {
-    const { isError } = this.state;
+    const {isError} = this.state;
     return (
       <form id="manForm" onSubmit={this.handleSubmit} noValidate>
         <div className="form-group row">
@@ -410,7 +406,7 @@ class RestaurantProfile extends Component {
               Delete
             </button>{" "}
           </td>
-        </tr>
+        </tr>,
       );
     }
 
@@ -427,11 +423,8 @@ class RestaurantProfile extends Component {
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          {this.renderManagerInfo()}
-        </tbody>
+        <tbody>{this.renderManagerInfo()}</tbody>
       </table>
-
     );
   }
 
@@ -477,7 +470,7 @@ class RestaurantProfile extends Component {
               <div className="modal-header">
                 <h5 className="modal-title" id="deleteManagerModalLabel">
                   Delete Manager
-                  </h5>
+                </h5>
                 <button
                   type="button"
                   className="close"
@@ -490,7 +483,7 @@ class RestaurantProfile extends Component {
               <div className="modal-body">
                 <p className="alert alert-warning" id="deleteResultText">
                   Please Wait...
-                  </p>
+                </p>
               </div>
               <div className="modal-footer">
                 <button
@@ -499,7 +492,7 @@ class RestaurantProfile extends Component {
                   data-dismiss="modal"
                 >
                   Close
-                  </button>
+                </button>
               </div>
             </div>
           </div>
