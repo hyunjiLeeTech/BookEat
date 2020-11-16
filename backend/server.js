@@ -21,15 +21,15 @@ const port = process.env.PORT || 5000;
 const cache = require("memory-cache"); //in-memory cache
 const moment = require("moment");
 const nodemailer = require("nodemailer");
-const frontEndUrl = "https://bookeatfront.herokuapp.com";
+const frontEndUrl = "http://localhost:3000"; // It needs to be changed when you want to deploy this program
 const Axios = require("axios");
 var gfs;
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "a745874355@gmail.com",
-    pass: "Aa7758521.",
+    user: process.env.EMAIL_ID,
+    pass: process.env.EMAIL_PWD,
   },
 });
 
@@ -465,7 +465,7 @@ app.get("/verifyEmail/:id", async (req, res) => {
  */
 async function sendActiveEmail(destination, htmlMessage, callback) {
   var mailOptions = {
-    from: "a745874355@gmail.com",
+    from: process.env.EMAIL_ID,
     to: destination,
     subject: "Active your BookEat Account",
     html: htmlMessage,
@@ -1461,7 +1461,7 @@ app.post("/requestResetPasswordEmail", (req, res) => {
               timestamp +
               "</p>";
             var mailOptions = {
-              from: "a745874355@gmail.com",
+              from: process.env.EMAIL_ID,
               to: acc.email,
               subject: "Reset password",
               html: htmlMessage,
@@ -1545,7 +1545,7 @@ async function initRemindEmailTimers() {
       moment(new Date(popedRevs.dateTime)).format("YYYY-MM-DD HH:mm") +
       "</p>";
     var mailOptionsConfirm = {
-      from: "a745874355@gmail.com",
+      from: process.env.EMAIL_ID,
       to: emailaddress,
       subject: "Your reservation comes soon",
       html: htmlMessageConfirm,
