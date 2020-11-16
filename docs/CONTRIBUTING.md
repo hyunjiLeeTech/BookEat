@@ -5,7 +5,7 @@
 1. Copy and paste the link into a terminal or visual studio code with the following command: git clone https://github.com/hyunjiLeeTech/BookEat.git
 2. Firstly, setup the backend. Move your location to your backend directory. (e.i., `cd /BookEat/backend`)
 3. install all the dependencies using the npm command: npm i
-4. To connect to the database, create an .env file and put your MongoDB database connection string with the variable name.
+4. To connect to the database and to use email confirmation, create an .env file with some variable names. Check our [.env guide](./env.md) for more details.
 
 - The syntax of the string is the following: `ATLAS_URI=<mongobd connection string>`
 - The string for test is the following: `ATLAS_URI=mongodb+srv://bookeat:Password123!@bookeat.rf4uz.mongodb.net/BookEat?retryWrites=true&w=majorityATLAS_URI=mongodb+srv://BookEat:zCFux4oJW3LbSCz4@bookeat.9xjtn.mongodb.net/BookEat?retryWrites=true&w=majority`
