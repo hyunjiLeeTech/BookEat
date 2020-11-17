@@ -34,12 +34,14 @@ class Daily extends Component {
           height: "15rem",
         }}
       >
-        <img
-          src={serverAddress + "/getImage/" + r.pictures[0]}
-          height="100%"
-          width="100%"
-          alt="Restaurant"
-        />
+        <Link to={"/restaurant/" + r._id}>
+          <img
+            src={serverAddress + "/getImage/" + r.pictures[0]}
+            height="100%"
+            width="100%"
+            alt="Restaurant"
+          />
+        </Link>
         <Link to={"/restaurant/" + r._id}>{r.resName} </Link>
       </div>
     );
