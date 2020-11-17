@@ -7,7 +7,6 @@ There are three variables you need to put on this document.
 This is for MongoDB connection. You need to create a MondoDB cluster and connect it to thie program.
 
 - The syntax of the string is the following: `ATLAS_URI=<mongobd connection string>`
-- The string for test is the following: `ATLAS_URI=mongodb+srv://bookeat:Password123!@bookeat.rf4uz.mongodb.net/bookeat?retryWrites=true&w=majority`
 
 ### EMAIL_ID
 
