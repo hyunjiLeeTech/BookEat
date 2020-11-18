@@ -6,7 +6,6 @@
 2. Firstly, setup the backend. Move your location to your backend directory. (e.i., `cd /BookEat/backend`)
 3. install all the dependencies using the npm command: npm i
 4. To connect to the database and to use email confirmation, create an .env file with some variable names. Check our [.env guide](./env.md) for more details.
-
 5. Check the localhost number on the files in the backend folder named customer.js, server.js, and restaurant.js follow your frontend link (ex localhost:3000)
 6. Run the backend using `nodemon server`
 7. Secondly, setup the frontend. Use the cd command to make sure you are in the folder named 'frontend'.

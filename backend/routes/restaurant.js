@@ -20,8 +20,8 @@ const frontEndUrl = "https://bookeatfront.herokuapp.com";
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "a745874355@gmail.com",
-    pass: "Aa7758521.",
+    user: process.env.EMAIL_ID,
+    pass: process.env.EMAIL_PWD,
   },
 });
 
@@ -434,7 +434,7 @@ router.route("/cancelreservation").post(async (req, res) => {
           "</p>" +
           "<p>If you have any questions or concerns, please directly contact restaurant</p>";
         var mailOptions = {
-          from: "a745874355@gmail.com",
+          from: process.env.EMAIL_ID,
           to: cus.account.email,
           subject: "Booking Cancelled by Restaurant",
           html: htmlMessage,
@@ -498,7 +498,7 @@ router.route("/notAttend").post(async (req, res) => {
             "<p>For more information, please login to your BookEat account and go to reservation history page.</p>" +
             "<p>As a result of keep missing reservation, we blocked your BookEat account. For more inforamtion, please contact BookEat.</p>";
           var mailOptions = {
-            from: "a745874355@gmail.com",
+            from: process.env.EMAIL_ID,
             to: emailaddress,
             subject: "Account blocked due to missing reservation.",
             html: htmlMessage,
@@ -512,7 +512,7 @@ router.route("/notAttend").post(async (req, res) => {
             "<p>For more information, please login to your BookEat account and go to reservation history page.</p>" +
             "<p>We understand your inconvinence. However, keeping missing reservation will result in your account to be blocked. For more inforamtion, please contact BookEat.</p>";
           var mailOptions = {
-            from: "a745874355@gmail.com",
+            from: process.env.EMAIL_ID,
             to: emailaddress,
             subject: "Missed reservation.",
             html: htmlMessage,
@@ -664,7 +664,7 @@ router.route("/reserve").post(async (req, res) => {
           console.log("email address is null in restaurant reserve");
         if (emailaddress !== null) {
           var mailOptions = {
-            from: "a745874355@gmail.com",
+            from: process.env.EMAIL_ID,
             to: emailaddress,
             subject: "Booking Confirmation",
             html: htmlMessage,
@@ -684,7 +684,7 @@ router.route("/reserve").post(async (req, res) => {
             moment(new Date(popedRevs.dateTime)).format("YYYY-MM-DD HH:mm") +
             "</p>";
           var mailOptionsConfirm = {
-            from: "a745874355@gmail.com",
+            from: process.env.EMAIL_ID,
             to: emailaddress,
             subject: "Your reservation comes soon",
             html: htmlMessageConfirm,
