@@ -14,8 +14,8 @@ const frontEndUrl = "https://bookeatfront.herokuapp.com";
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "a745874355@gmail.com",
-    pass: "Aa7758521.",
+    user: process.env.EMAIL_ID,
+    pass: process.env.EMAIL_PWD,
   },
 });
 
@@ -303,7 +303,7 @@ router.post("/updatereservation", async (req, res) => {
         console.log("email address is null in restaurant reserve");
       if (emailaddress !== null) {
         var mailOptions = {
-          from: "a745874355@gmail.com",
+          from: process.env.EMAIL_ID,
           to: emailaddress,
           subject: "Booking Update",
           html: htmlMessage,
@@ -323,7 +323,7 @@ router.post("/updatereservation", async (req, res) => {
           moment(new Date(popedRevs.dateTime)).format("YYYY-MM-DD HH:mm") +
           "</p>";
         var mailOptionsConfirm = {
-          from: "a745874355@gmail.com",
+          from: process.env.EMAIL_ID,
           to: emailaddress,
           subject: "Your reservation comes soon",
           html: htmlMessageConfirm,
@@ -424,7 +424,7 @@ router.post("/updatereservation", async (req, res) => {
         console.log("email address is null in restaurant reserve");
       if (emailaddress !== null) {
         var mailOptions = {
-          from: "a745874355@gmail.com",
+          from: process.env.EMAIL_ID,
           to: emailaddress,
           subject: "Booking Update",
           html: htmlMessage,
@@ -444,7 +444,7 @@ router.post("/updatereservation", async (req, res) => {
           moment(new Date(popedRevs.dateTime)).format("YYYY-MM-DD HH:mm") +
           "</p>";
         var mailOptionsConfirm = {
-          from: "a745874355@gmail.com",
+          from: process.env.EMAIL_ID,
           to: emailaddress,
           subject: "Your reservation comes soon",
           html: htmlMessageConfirm,
@@ -575,7 +575,7 @@ router.route("/cancelreservation").post(async (req, res) => {
           "</p>" +
           "<p>If you have any questions or concerns, please directly contact restaurant</p>";
         var mailOptions = {
-          from: "a745874355@gmail.com",
+          from: process.env.EMAIL_ID,
           to: cus.account.email,
           subject: "Booking Cancelled by Restaurant",
           html: htmlMessage,
