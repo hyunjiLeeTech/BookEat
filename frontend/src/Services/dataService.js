@@ -542,12 +542,10 @@ export default {
       });
   },
   editRestaurantProfile(state) {
-    Axios.post(serverAddress + "/restaurant/editresprofile", state, {
+    return Axios.post(serverAddress + "/restaurant/editresprofile", state, {
       headers: authHeader(),
     })
-      .then((res) => {
-        return res.data;
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(err);
         if (err.response && err.response.status === 401) {

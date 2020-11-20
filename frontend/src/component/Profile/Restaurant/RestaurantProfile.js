@@ -316,23 +316,23 @@ class RestaurantProfile extends Component {
           }
         });
       } else {
-        ds.editRestaurantProfile(this.state).then((result) => {
-          try {
+        ds.editRestaurantProfile(this.state)
+          .then(() => {
             $("#resProfileResultText")
               .text("Profiled is edited")
               .removeClass("alert-warning")
               .removeClass("alert-danger")
               .removeClass("alert-success")
               .addClass("alert-success");
-          } catch (err) {
+          })
+          .catch((err) => {
             $("#resProfileResultText")
-              .text("Sorry, " + err.errmsg)
+              .text("Sorry, " + err)
               .removeClass("alert-warning")
               .removeClass("alert-danger")
               .removeClass("alert-success")
               .addClass("alert-danger");
-          }
-        });
+          });
       }
     } else {
       console.log("Form is invalid!");

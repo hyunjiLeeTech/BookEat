@@ -962,7 +962,9 @@ let editRestaurantProfile = async (obj) => {
   const regExpPhone = RegExp(
     /^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/,
   );
-  const regExpPostal = RegExp(/^\d{5}-\d{4}|\d{5}|[A-Z]\d[A-Z] \d[A-Z]\d$/);
+  const regExpPostal = RegExp(
+    /^(?!.*[DFIOQU])[A-VXY][0-9][A-Z] ?[0-9][A-Z][0-9]$/,
+  );
   const regExpNumbers = RegExp(/^[0-9]+$/);
   const regExpBusinessNumber = RegExp(/^\d{9}$/);
 
